@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <img src="fallback.jpg" alt="Fallback Image">
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        section {
+            padding: 60px 0;
+        }
+        .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .menu-item {
+            transition: transform 0.3s;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+        .fallback-img {
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            font-size: 16px;
+            color: #555;
+        }
+        #about, #contact {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+            border-radius: 10px;
+        }
+        #about h2, #contact h2 {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        #about p, #contact p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-uppercase" href="#home">Aftab's Restaurant</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#order">Order Online</a></li>
+                </ul>
+                <!-- <button id="logout-btn" class="btn btn-danger d-none">Sign Out</button> -->
+            <!-- <a id="signin-btn" href="signin.html" class="btn btn-primary">Sign In</a>
+            <a id="signup-btn" href="signup.html" class="btn btn-secondary">Sign Up</a> -->
+
+            <!-- <button id="signup-btn" type="submit">Sign Up</button>
+            
+
+<button id="signin-btn" type="submit">Sign In</button> -->
+<button id="logout-btn" class="btn btn-danger">Logout</button>
+
+
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="container-fluid position-relative text-center text-white">
+        <div class="overlay"></div>
+        <video id="heroVideo" class="w-100 rounded" autoplay loop muted>
+            <source src="https://files.codingninjas.in/restaurant-1706081051.mp4" type="video/mp4">
+        </video>
+        <div class="content position-absolute top-50 start-50 translate-middle">
+            <h1 class="fw-bold">Welcome to Aftab Restaurant</h1>
+            <p class="lead">Experience the finest cuisine with our specially curated menu.</p>
+            <button id="toggleVideo" class="btn btn-light">Pause Video</button>
+        </div>
+    </section>
+    
+
+    <section id="menu" class="container mt-5 text-center">
+        <h2>Our Menu</h2>
+        <div class="row mt-4" id="menu-items">
+            <!-- Menu items dynamically inserted -->
+        </div>
+    </section>
+
+    <section id="order" class="container mt-5 text-center">
+        <h2>Order Online</h2>
+        <p>Place your order online and enjoy your meal at home.</p>
+        
+        <button class="btn btn-primary" onclick="placeOrder()">Order Now</button>
+
+        
+    </section>
+
+    <section id="contact" class="container mt-5 text-center">
+        <h2 class="text-danger fw-bold">Contact Us</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><i class="fas fa-map-marker-alt text-danger"></i> <strong> Address:</strong> Greater Noida</p>
+                <p><i class="fas fa-phone text-danger"></i> <strong> Phone:</strong> +91 6393571613</p>
+                <p><i class="fas fa-envelope text-danger"></i> <strong> Email:</strong> 
+                    <a href="mailto:aayan2231092@gmail.com">aayan2231092@gmail.com</a>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <iframe width="100%" height="200" style="border:0;" loading="lazy" allowfullscreen
+                src="https://www.google.com/maps?q=Greater+Noida&output=embed">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+       async function loadMenu() {
+    const menu = [
+        { title: "Margherita Pizza", price: "₹399", img: "https://img.taste.com.au/DhThzPm9/taste/2016/11/eat-pray-love-39581-3.jpeg" },
+        { title: "Grilled Chicken", price: "₹449", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToMozkkZv6pQonP3nn1BlXT2uLTWJxeshxYA&s" },
+        { title: "Pasta Alfredo", price: "₹149", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCUw58u2Ag2-HS5wSVhiuliU6rjAWdqFelMw&s" },
+        { title: "Caesar Salad", price: "₹99", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKU3veOsW1W9y8u0a4fvseNpIoB8K9zpcmjQ&s" },
+        { title: "Cheeseburger", price: "₹199", img: "https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/master/pass/Smashburger-recipe-120219.jpg" },
+        { title: "Sushi Platter", price: "₹129", img: "https://media.istockphoto.com/id/1224916255/photo/sushi-maki-with-salmon-shrimp-cucumber.jpg?s=612x612&w=0&k=20&c=qIu0V_qKpP1R2xWMxID0tRGPDhOivHQ9CJFiZLcXpI8=" },
+        { title: "Chocolate Cake", price: "₹119", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb_4cZ6oX0NziBxgUPrlt4hxokwKXIhekw6Q&s" },
+        { title: "Chicken Biryani", price: "₹199", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP6AlsY64CMBtlrPiP137YFtHq-asKTix06Q&s" },
+        { title: "Cold Coffee", price: "₹99", img: "https://tvanamm.com/wp-content/uploads/2024/01/Cold-Coffee.jpg" }
+    ];
+    
+    const menuContainer = document.getElementById("menu-items");
+    menuContainer.innerHTML = "";
+    
+    menu.forEach(item => {
+        const menuItem = document.createElement("div");
+        menuItem.classList.add("col-md-4", "menu-item", "mb-4");
+        menuItem.innerHTML = `
+            <div class="card">
+                <img src="${item.img}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">${item.title}</h5>
+                    <p class="card-text">Price: ${item.price}</p>
+                    <button class="btn btn-success add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        `;
+        menuContainer.appendChild(menuItem);
+    });
+}
+
+// **Add event listener for dynamically created buttons**
+document.addEventListener("DOMContentLoaded", function () {
+    loadMenu(); // Load menu on page load
+
+    document.getElementById("menu-items").addEventListener("click", function (e) {
+        if (e.target.classList.contains("add-to-cart")) {
+            let card = e.target.closest(".card");
+            let title = card.querySelector(".card-title").innerText;
+            let price = card.querySelector(".card-text").innerText.replace("Price: ₹", "").trim();
+            let img = card.querySelector(".card-img-top").src;
+
+            addToCart(title, parseFloat(price), img);
+        }
+    });
+});
+
+// **Add to Cart Function**
+function addToCart(title, price, img) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingItem = cart.find(item => item.title === title);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ title, price, img, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${title} added to cart!`);
+}
+
+    </script>
+   <script type="module" src="auth-redirect.js"></script>
+   <script type="module" src="logout.js"></script>
+   
+   <h2 class="text-center mt-4">Shopping Cart</h2>
+   <div id="cart-container" class="container">
+       <table class="table">
+           <thead>
+               <tr>
+                   <th>Image</th>
+                   <th>Item</th>
+                   <th>Price</th>
+                   <th>Quantity</th>
+                   <th>Total</th>
+                   <th>Action</th>
+               </tr>
+           </thead>
+           <tbody id="cart-items">
+               <!-- Cart items will be dynamically inserted here -->
+           </tbody>
+       </table>
+       <h4 id="cart-total" class="text-end">Total: ₹0</h4>
+       <button id="checkout-btn" class="btn btn-success">Proceed to Checkout</button>
+
+   </div>
+   
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="checkout.js"></script>  <!-- Make sure this is included -->
+
+
+
+</body>
+<footer class="bg-dark text-white text-center text-lg-start mt-5">
+    <div class="container p-4">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="text-uppercase">Aftab's Restaurant</h5>
+                <p>Experience delicious meals with the best quality ingredients. Visit us or order online today! And enjoyed Your Meal </p>
+            </div>
+
+
+
+            
+            <!-- Quick Links -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="text-uppercase">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#home" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="#menu" class="text-white text-decoration-none">Menu</a></li>
+                    <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+                    <li><a href="#order" class="text-white text-decoration-none">Order Online</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-lg-4 col-md-12 mb-4">
+                <h5 class="text-uppercase">Follow Us</h5>
+                <a href="#" class="text-white me-3"> <i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center p-3 bg-secondary">
+        &copy; 2025 Aftab's Restaurant | All Rights Reserved
+    </div>
+</footer>
+
+</html>
