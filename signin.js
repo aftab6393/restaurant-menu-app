@@ -2,7 +2,7 @@
 import { auth } from "./firebase-config.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// Ensure DOM is fully loaded before running script
+// Ensure DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     const signInForm = document.getElementById("signin-form");
     const signInBtn = document.getElementById("signin-btn");
@@ -19,8 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
+        const password = document.getElementById("password").value.trim();
 
+        // Clear previous error message
         errorMessage.textContent = "";
 
         if (!email || !password) {
@@ -29,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // ✅ Ensure button exists before disabling
-            if (signInBtn) {
+            // Show loading state
+            if (signInBtn && btnText && loadingSpinner) {
                 signInBtn.disabled = true;
                 btnText.textContent = "Signing in...";
                 loadingSpinner.classList.remove("d-none");
@@ -40,22 +41,28 @@ document.addEventListener("DOMContentLoaded", () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             alert("Sign In Successful!");
 
-            // ✅ Redirect to Home Page after successful sign-in
+            // Redirect after successful sign-in
             window.location.href = "index.html";
         } catch (error) {
             console.error("Sign-In Error:", error);
-            if (error.code === "auth/invalid-email") {
-                errorMessage.textContent = "Invalid email format.";
-            } else if (error.code === "auth/user-not-found") {
-                errorMessage.textContent = "No account found with this email.";
-            } else if (error.code === "auth/wrong-password") {
-                errorMessage.textContent = "Incorrect password.";
-            } else {
-                errorMessage.textContent = error.message;
+
+            // Firebase authentication error handling
+            switch (error.code) {
+                case "auth/invalid-email":
+                    errorMessage.textContent = "Invalid email format.";
+                    break;
+                case "auth/user-not-found":
+                    errorMessage.textContent = "No account found with this email.";
+                    break;
+                case "auth/wrong-password":
+                    errorMessage.textContent = "Incorrect password.";
+                    break;
+                default:
+                    errorMessage.textContent = error.message;
             }
         } finally {
-            // ✅ Ensure button exists before re-enabling
-            if (signInBtn) {
+            // Reset button state
+            if (signInBtn && btnText && loadingSpinner) {
                 signInBtn.disabled = false;
                 btnText.textContent = "Sign In";
                 loadingSpinner.classList.add("d-none");

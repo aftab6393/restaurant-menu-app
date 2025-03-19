@@ -127,3 +127,102 @@ body {
 .btn-danger, .btn-secondary {
     margin: 5px;
 }
+/* 🔵 Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #bd7c84, #d61021); /* Gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 🟣 Auth Container (Matches Sign-In Page) */
+.auth-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+
+/* 🎨 Form Box */
+.form-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 🟠 Title & Subtitle */
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 🟢 Input Fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* 🔵 Button Styles */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #007bff, #6610f2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #dfd10b, #84b11d);
+}
+
+/* ❌ Error Message */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* 🔗 Extra Links */
+.extra-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.extra-links a:hover {
+    color: #6610f2;
+}
+
+/* 🔄 Loader */
+.d-none {
+    display: none;
+}
