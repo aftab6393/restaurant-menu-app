@@ -89,10 +89,10 @@ video {
 }
 
 .btn-primary {
-    width: 100%;
+    width: 10%;
     padding: 12px;
     background: linear-gradient(45deg, #007bff, #6610f2);
-    color: white;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -102,7 +102,7 @@ video {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(45deg, #dfd10b, #84b11d);
+    background: linear-gradient(45deg, #dfd10b, #b41010);
     transform: scale(1.1);
 }
 
@@ -197,4 +197,108 @@ input:focus {
 
 .extra-links a:hover {
     color: #6610f2;
+}
+.navbar-nav .nav-link {
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-link:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+/* 🌟 General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* 🏆 Navbar Styling */
+.navbar {
+    background: linear-gradient(45deg, #ff6b6b, #ff4757);
+    padding: 15px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important;
+    transform: scale(1.1);
+}
+
+/* 🍽️ Menu Items Styling */
+#order-online-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu-item {
+    padding: 15px;
+}
+
+/* 📦 Card Styling */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+/* ✨ Text Styling */
+.card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ff4757;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* 🛒 Button Styling */
+.add-to-cart {
+    width: 100%;
+    background-color: #ff4757;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.add-to-cart:hover {
+    background-color: #e63946;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
 }

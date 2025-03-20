@@ -5,13 +5,19 @@ const menu = [
     { id: 4, title: "Chocolate Cake", price: 119, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb_4cZ6oX0NziBxgUPrlt4hxokwKXIhekw6Q&s" },
     { id: 5, title: "Grilled Chicken", price: 449, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToMozkkZv6pQonP3nn1BlXT2uLTWJxeshxYA&s" },
     { id: 6, title: "Pasta Alfredo", price: 149, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCUw58u2Ag2-HS5wSVhiuliU6rjAWdqFelMw&s" },
-    { id: 7, title: "Cheeseburger", price: 199, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNp5v5bdXryvZnpXyH4kBOOB7oU6PYhRivhQ&s" }
+    { id: 7, title: "Cheeseburger", price: 199, img: "https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/1:1/w_2560%2Cc_limit/Smashburger-recipe-120219.jpg" }
+    
 ];
 
-// Function to display menu in Order Online section
-function displayMenuOnline() {
-    let orderContainer = document.getElementById("order-online-container");
-    orderContainer.innerHTML = "";
+function displayMenu() {
+    let menuContainer = document.getElementById("menu-container");
+
+    if (!menuContainer) {
+        console.error("❌ Error: #menu-container not found in DOM!");
+        return;
+    }
+
+    menuContainer.innerHTML = "";
 
     menu.forEach(item => {
         let menuItem = document.createElement("div");
@@ -23,12 +29,12 @@ function displayMenuOnline() {
                 <div class="card-body">
                     <h5 class="card-title">${item.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">₹${item.price}</h6>
-                    <button class="btn btn-primary add-to-cart" data-title="${item.title}" data-price="${item.price}" data-img="${item.img}">Add to Cart</button>
+                    <button class="btn btn-primary add-to-cart" data-id="${item.id}">Add to Cart</button>
                 </div>
             </div>
         `;
-        orderContainer.appendChild(menuItem);
+        menuContainer.appendChild(menuItem);
     });
 }
 
-document.addEventListener("DOMContentLoaded", displayMenuOnline);
+document.addEventListener("DOMContentLoaded", displayMenu);
