@@ -1,28 +1,57 @@
+/* 🔵 Global Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #f2f3f5, #f0eef1); /* Gradient background */
 }
 
+/* 🌟 Navbar */
 .navbar {
     padding: 15px;
+    background: linear-gradient(45deg, #e44663, #eb9f9f);
 }
 
 .navbar-toggler {
     border: none;
 }
 
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* 🎥 Hero Section */
 video {
     border-radius: 10px;
 }
 
+/* 📜 Navigation Links */
 .nav-link {
     cursor: pointer;
+    display: block;
 }
 
+/* 📱 Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        text-align: center;
+    }
+}
+
+/* 🍽️ Menu Items */
 .menu-item {
     margin-bottom: 20px;
 }
 
+/* 🏷️ Card Styling */
 .card {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -30,26 +59,7 @@ video {
     transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
-    .navbar-collapse {
-        text-align: center;
-    }
-    
-    .nav-link {
-        display: block;
-    }
-}
-footer {
-    padding-top: 20px;
-}
-
-footer a:hover {
-    color: #f8b400;
-}
-
-footer .bg-secondary {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-}
+/* 🛒 Cart Styling */
 #cart {
     background-color: #f8f9fa;
     padding: 50px;
@@ -67,125 +77,17 @@ footer .bg-secondary {
     overflow: hidden;
 }
 
-.btn-sm {
-    margin: 0 5px;
-}
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-}
-
-.navbar {
-    background: linear-gradient(45deg, #e44663, #c93535);
-}
-
-.navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.card {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-#checkout-btn {
-    background-color: #28a745;
-    color: white;
-    font-size: 18px;
-}
-.navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.9) !important;
-    transition: background-color 0.3s ease-in-out;
-}
 #cart-container {
     max-height: 400px;
     overflow-y: auto;
-}
-.btn-primary:hover {
-    transform: scale(1.1);
-    transition: 0.3s;
-}
-.add-to-cart:active {
-    transform: scale(0.95);
-}
-
-#contact p {
-    font-size: 18px;
-    color: #444;
-}
-#contact i {
-    margin-right: 8px;
-}
-#cart-container {
     overflow-x: auto;
 }
-.btn-danger, .btn-secondary {
-    margin: 5px;
-}
-/* 🔵 Global Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #bd7c84, #d61021); /* Gradient background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+/* 🛍️ Buttons */
+.btn-sm {
+    margin: 0 5px;
 }
 
-/* 🟣 Auth Container (Matches Sign-In Page) */
-.auth-container {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 350px;
-}
-
-/* 🎨 Form Box */
-.form-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* 🟠 Title & Subtitle */
-h2 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #666;
-}
-
-/* 🟢 Input Fields */
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-input:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* 🔵 Button Styles */
 .btn-primary {
     width: 100%;
     padding: 12px;
@@ -201,6 +103,18 @@ input:focus {
 
 .btn-primary:hover {
     background: linear-gradient(45deg, #dfd10b, #84b11d);
+    transform: scale(1.1);
+}
+
+.add-to-cart:active {
+    transform: scale(0.95);
+}
+
+/* 🚀 Checkout Button */
+#checkout-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
 }
 
 /* ❌ Error Message */
@@ -208,6 +122,69 @@ input:focus {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+}
+
+/* 📞 Contact Section */
+#contact p {
+    font-size: 18px;
+    color: #444;
+}
+
+#contact i {
+    margin-right: 8px;
+}
+
+/* 📌 Footer */
+footer {
+    padding-top: 20px;
+}
+
+footer a:hover {
+    color: #f8b400;
+}
+
+footer .bg-secondary {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 🔄 Loader */
+.d-none {
+    display: none;
+}
+
+/* 🟣 Authentication Form */
+.auth-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+
+/* 📝 Form Box */
+.form-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎨 Input Fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 /* 🔗 Extra Links */
@@ -220,9 +197,4 @@ input:focus {
 
 .extra-links a:hover {
     color: #6610f2;
-}
-
-/* 🔄 Loader */
-.d-none {
-    display: none;
 }
