@@ -1,101 +1,88 @@
-// ✅ Function to load cart from localStorage
+document.addEventListener("DOMContentLoaded", loadCart);
+
 function loadCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartContainer = document.getElementById("cart-items");
-    let cartTotal = document.getElementById("cart-total");
+    let cartItemsContainer = document.getElementById("cart-items");
+    let cartTotalElement = document.getElementById("cart-total");
 
-    if (!cartContainer || !cartTotal) {
-        console.error("❌ Error: Cart elements not found in DOM!");
-        return;
-    }
-
-    console.log("🛒 Loading cart data:", cart);
-
-    cartContainer.innerHTML = "";
-    let totalAmount = 0;
+    cartItemsContainer.innerHTML = "";
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = "<tr><td colspan='6' class='text-center'>🛒 Your cart is empty</td></tr>";
-        cartTotal.innerText = `Total: ₹0.00`;
+        cartItemsContainer.innerHTML = `<tr><td colspan="6" class="text-center">🛒 Your cart is empty</td></tr>`;
+        cartTotalElement.innerText = "Total: ₹0";
         return;
     }
 
+    let total = 0;
+
     cart.forEach((item, index) => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
         let row = document.createElement("tr");
         row.innerHTML = `
-            <td><img src="${item.img}" width="50" onerror="this.onerror=null;this.src='fallback.jpg';"></td>
+            <td><img src="${item.img}" alt="${item.title}" width="50"></td>
             <td>${item.title}</td>
             <td>₹${item.price}</td>
             <td>
-                <button class="btn btn-sm btn-secondary decrease" data-index="${index}">-</button>
-                <span class="quantity">${item.quantity}</span>
-                <button class="btn btn-sm btn-secondary increase" data-index="${index}">+</button>
+                <button class="btn btn-sm btn-outline-danger" onclick="updateQuantity(${index}, -1)">➖</button>
+                <span class="mx-2">${item.quantity}</span>
+                <button class="btn btn-sm btn-outline-success" onclick="updateQuantity(${index}, 1)">➕</button>
             </td>
-            <td>₹${(item.price * item.quantity).toFixed(2)}</td>
-            <td><button class="btn btn-danger btn-sm remove" data-index="${index}">Remove</button></td>
+            <td>₹${itemTotal}</td>
+            <td><button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">❌</button></td>
         `;
-        cartContainer.appendChild(row);
-        totalAmount += item.price * item.quantity;
+        cartItemsContainer.appendChild(row);
     });
 
-    cartTotal.innerText = `Total: ₹${totalAmount.toFixed(2)}`;
+    cartTotalElement.innerText = `Total: ₹${total}`;
 }
 
-// ✅ Function to update quantity
 function updateQuantity(index, change) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    if (!cart[index]) return;
-
-    cart[index].quantity += change;
-
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1); // Remove item if quantity is 0
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart[index].quantity + change > 0) {
+        cart[index].quantity += change;
+    } else {
+        cart.splice(index, 1);
     }
-
     localStorage.setItem("cart", JSON.stringify(cart));
     loadCart();
 }
 
-// ✅ Function to remove item from cart
-function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem("cart"));
     cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     loadCart();
 }
 
-// ✅ Event delegation for cart actions
-document.addEventListener("click", function(event) {
-    let target = event.target;
-    let index = target.getAttribute("data-index");
-
-    if (index === null) return;
-    index = parseInt(index);
-
-    if (target.classList.contains("remove")) {
-        removeItem(index);
-    } else if (target.classList.contains("increase")) {
-        updateQuantity(index, 1);
-    } else if (target.classList.contains("decrease")) {
-        updateQuantity(index, -1);
-    }
-});
-
-// ✅ Checkout button functionality
-document.getElementById("checkout-btn").addEventListener("click", function() {
+// 🔹 Razorpay Payment Integration
+document.getElementById("checkout-btn").addEventListener("click", function () {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
-        alert("Your cart is empty!");
+        alert("🛒 Your cart is empty!");
         return;
     }
-    
-    // Proceed to payment (replace this function with your actual payment logic)
-    alert("Proceeding to checkout...");
-});
 
-// ✅ Ensure cart loads on page load
-window.onload = function() {
-    console.log("📦 Cart page loaded...");
-    loadCart();
-};
+    let totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100; // Convert to paise (₹1 = 100 paise)
+
+    let options = {
+        "key": "YOUR_RAZORPAY_KEY", // 🟢 Replace with your Razorpay API Key
+        "amount": totalAmount,
+        "currency": "INR",
+        "name": "Aftab's Restaurant",
+        "description": "Food Order Payment",
+        "image": "https://yourwebsite.com/logo.png", // Add your logo
+        "handler": function (response) {
+            alert("✅ Payment Successful! Payment ID: " + response.razorpay_payment_id);
+            localStorage.removeItem("cart"); // Clear cart after successful payment
+            loadCart();
+        },
+        "theme": {
+            "color": "#28a745"
+        }
+    };
+
+    let rzp1 = new Razorpay(options);
+    rzp1.open();
+});
