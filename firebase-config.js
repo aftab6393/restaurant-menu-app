@@ -12,6 +12,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
+console.log("API Key:", process.env.REACT_APP_FIREBASE_API_KEY); // Debugging line
+
 export default firebaseConfig;
 
 
