@@ -10,7 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("🚨 Logout button NOT FOUND in the DOM!");
         return;
     }
-
+    document.addEventListener("DOMContentLoaded", function () {
+        let user = localStorage.getItem("user"); // Fetch stored user
+        if (user) {
+            document.getElementById("logout-btn").style.display = "block";
+        } else {
+            document.getElementById("logout-btn").style.display = "none";
+        }
+    });
+    
     // ✅ Show Logout Button Only if User is Signed In
     onAuthStateChanged(auth, (user) => {
         if (user) {

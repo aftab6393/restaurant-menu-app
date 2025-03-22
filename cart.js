@@ -49,6 +49,12 @@ function updateQuantity(index, change) {
     loadCart();
 }
 
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let count = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cart-count").textContent = count;
+}
+
 function removeFromCart(index) {
     let cart = JSON.parse(localStorage.getItem("cart"));
     cart.splice(index, 1);

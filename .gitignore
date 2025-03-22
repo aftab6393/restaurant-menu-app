@@ -1,8 +1,22 @@
 # Ignore environment variables
 .env
 
-# Ignore node_modules folder
+# Ignore dependency folders
 /node_modules
+/.firebase
 
 # Ignore Firebase config file
 /firebase-config.js
+
+# Ignore build files
+/dist
+/build
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore system files
+.DS_Store
+Thumbs.db
